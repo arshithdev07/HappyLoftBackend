@@ -32,6 +32,9 @@ public class UserService extends AbstractHelperService {
 
     public User updateUser(User user) {
         User existingUser = getUserByEmail(user.getEmail());
+        if(null == existingUser) {
+            throw new RuntimeException("User Record doesn't exist");
+        }
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setDob(user.getDob());
