@@ -12,7 +12,7 @@ import java.util.List;
  * Created by arshi on 3/17/2020.
  */
 @Service
-public class UserService {
+public class UserService extends AbstractHelperService {
 
     @Autowired
     UserRepository userRepository;
@@ -22,12 +22,30 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        List<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if(!existingUser.isEmpty()) {
+
+        User existingUser = getUserByEmail(user.getEmail());
+        if(null != existingUser) {
             throw new DuplicateRecordException("User with this Email ID already exists");
         }
         return userRepository.save(user);
     }
 
+    public User updateUser(User user) {
+        User existingUser = getUserByEmail(user.getEmail());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setDob(user.getDob());
+        existingUser.setBio(user.getBio());
+        existingUser.setAddress(user.getAddress());
+        return userRepository.save(existingUser);
+    }
+
+    public User fetchUserDetails(String email) {
+        User existingUser = getUserByEmail(email);
+        if(null == existingUser) {
+            throw new RuntimeException("User Record doesn't exist");
+        }
+        return existingUser;
+    }
 
 }

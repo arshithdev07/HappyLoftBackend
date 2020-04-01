@@ -1,6 +1,7 @@
 package com.tamu.happyloft.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by arshi on 3/17/2020.
@@ -24,6 +25,15 @@ public class User {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "DOB")
+    private Date dob;
+
+    @Column(name = "BIO")
+    private String bio;
+
+    @Column(name = "ADDRESS")
+    private String address;
 
     public Integer getId() {
         return id;
@@ -63,5 +73,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

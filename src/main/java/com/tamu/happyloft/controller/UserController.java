@@ -28,5 +28,14 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @PostMapping(value = "/update")
+    public User update(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+    @GetMapping(value = "/fetch")
+    public User fetchUserDetails(@RequestParam String email) {
+        return userService.fetchUserDetails(email);
+    }
 
 }
