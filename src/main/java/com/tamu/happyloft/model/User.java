@@ -2,6 +2,7 @@ package com.tamu.happyloft.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by arshi on 3/17/2020.
@@ -9,10 +10,11 @@ import java.util.Date;
 @Entity
 @Table(name = "USER_TABLE")
 public class User {
+
     @Column(name = "ID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -35,11 +37,14 @@ public class User {
     @Column(name = "ADDRESS")
     private String address;
 
-    public Integer getId() {
+    @OneToMany(mappedBy = "user")
+    private Set<UserServices> userServices;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
