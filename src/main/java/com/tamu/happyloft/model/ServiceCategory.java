@@ -12,7 +12,8 @@ public class ServiceCategory {
 
     @Column(name = "SC_ID")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_category_generator")
+    @SequenceGenerator(name="service_category_generator", sequenceName = "service_category_seq")
     private Long id;
 
     @Column(name = "SERVICE_CATEGORY_NAME")
@@ -24,6 +25,14 @@ public class ServiceCategory {
     @OneToMany(mappedBy = "serviceCategoryID", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<Service> services;
+
+    public ServiceCategory() {
+    }
+
+    public ServiceCategory(String serviceCategoryName, String serviceCategoryDescription) {
+        this.serviceCategoryName = serviceCategoryName;
+        this.serviceCategoryDescription = serviceCategoryDescription;
+    }
 
     public Long getId() {
         return id;
@@ -56,4 +65,6 @@ public class ServiceCategory {
     public void setServices(Set<Service> services) {
         this.services = services;
     }
+
+
 }

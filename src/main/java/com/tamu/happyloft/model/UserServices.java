@@ -11,7 +11,8 @@ public class UserServices {
 
     @Column(name = "USER_SERVICE_ID")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_service_generator")
+    @SequenceGenerator(name="user_service_generator", sequenceName = "user_service_seq")
     private Long id;
 
     @ManyToOne

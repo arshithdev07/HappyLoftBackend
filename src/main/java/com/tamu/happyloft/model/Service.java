@@ -13,7 +13,8 @@ public class Service {
 
     @Column(name = "SERVICE_ID")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_generator")
+    @SequenceGenerator(name="service_generator", sequenceName = "service_seq")
     private Long id;
 
     private String serviceName;

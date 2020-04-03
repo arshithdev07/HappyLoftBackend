@@ -12,7 +12,8 @@ public class ServiceStatus {
 
     @Column(name = "STATUS_ID")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_status_generator")
+    @SequenceGenerator(name="service_status_generator", sequenceName = "service_status_seq")
     private Long id;
 
     private String statusName;
@@ -22,6 +23,15 @@ public class ServiceStatus {
     @OneToMany(mappedBy = "serviceStatus", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<Service> services;
+
+    public ServiceStatus() {
+
+    }
+
+    public ServiceStatus(String statusName, String statusDescription) {
+        this.statusName = statusName;
+        this.statusDescription = statusDescription;
+    }
 
     public Long getId() {
         return id;

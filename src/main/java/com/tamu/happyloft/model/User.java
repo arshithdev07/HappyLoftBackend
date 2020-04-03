@@ -13,7 +13,8 @@ public class User {
 
     @Column(name = "ID")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name="user_generator", sequenceName = "user_seq")
     private Long id;
 
     @Column(name = "FIRST_NAME")
@@ -22,7 +23,7 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name="EMAIL")
+    @Column(name="EMAIL", unique = true)
     private String email;
 
     @Column(name = "PASSWORD")
@@ -39,6 +40,20 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<UserServices> userServices;
+
+    public User() {
+
+    }
+
+    public User(String firstName, String lastName, String email, String password, Date dob, String bio, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.dob = dob;
+        this.bio = bio;
+        this.address = address;
+    }
 
     public Long getId() {
         return id;
