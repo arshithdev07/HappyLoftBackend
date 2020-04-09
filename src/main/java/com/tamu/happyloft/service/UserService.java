@@ -40,6 +40,7 @@ public class UserService extends AbstractHelperService {
         existingUser.setDob(user.getDob());
         existingUser.setBio(user.getBio());
         existingUser.setAddress(user.getAddress());
+        existingUser.setContact(user.getContact());
         return userRepository.save(existingUser);
     }
 

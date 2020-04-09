@@ -38,6 +38,9 @@ public class User {
     @Column(name = "ADDRESS")
     private String address;
 
+    @Column(name = "CONTACT")
+    private String contact;
+
     @OneToMany(mappedBy = "user")
     private Set<UserServices> userServices;
 
@@ -45,7 +48,7 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String email, String password, Date dob, String bio, String address) {
+    public User(String firstName, String lastName, String email, String password, Date dob, String bio, String address, String contact) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -53,6 +56,7 @@ public class User {
         this.dob = dob;
         this.bio = bio;
         this.address = address;
+        this.contact = contact;
     }
 
     public Long getId() {
@@ -117,5 +121,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
