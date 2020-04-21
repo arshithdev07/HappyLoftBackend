@@ -1,5 +1,6 @@
 package com.tamu.happyloft.service;
 
+import com.tamu.happyloft.dto.ResetPasswordDto;
 import com.tamu.happyloft.model.User;
 import com.tamu.happyloft.repository.UserRepository;
 import com.tamu.happyloft.service.exceptions.DuplicateRecordException;
@@ -52,6 +53,19 @@ public class UserService extends AbstractHelperService {
         return existingUser;
     }
 
+    public String changePassword(ResetPasswordDto resetPasswordDto) {
+        User existingUser = getUserByEmail(resetPasswordDto.getEmail());
+        if(null == existingUser) {
+            throw new RuntimeException("User Record doesn't exist");
+        }
 
+        if(!existingUser.getPassword().equals(resetPasswordDto.getCurrentPassword())) {
+            throw new RuntimeException("Current Password doesn't match");
+        }
+
+        existingUser.setPassword(resetPasswordDto.getNewPassword());
+        userRepository.save(existingUser);
+        return "User Password Updated";
+    }
 
 }

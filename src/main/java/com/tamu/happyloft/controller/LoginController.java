@@ -22,4 +22,5 @@ public class LoginController {
     public String loginUser(@RequestBody LoginDto loginDto) {
         return loginService.loginUser(loginDto);
     }
+
 }
