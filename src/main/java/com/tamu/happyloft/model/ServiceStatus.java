@@ -1,7 +1,6 @@
 package com.tamu.happyloft.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by arshi on 4/2/2020.
@@ -19,10 +18,6 @@ public class ServiceStatus {
     private String statusName;
 
     private String statusDescription;
-
-    @OneToMany(mappedBy = "serviceStatus", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<Service> services;
 
     public ServiceStatus() {
 
@@ -57,11 +52,4 @@ public class ServiceStatus {
         this.statusDescription = statusDescription;
     }
 
-    public Set<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(Set<Service> services) {
-        this.services = services;
-    }
 }

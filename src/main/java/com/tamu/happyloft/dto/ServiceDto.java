@@ -1,50 +1,22 @@
-package com.tamu.happyloft.model;
+package com.tamu.happyloft.dto;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by arshi on 4/2/2020.
+ * Created by arshi on 4/22/2020.
  */
-@Entity
-@Table(name = "SERVICE_TABLE")
-public class Service {
-
-    @Column(name = "SERVICE_ID")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_generator")
-    @SequenceGenerator(name="service_generator", sequenceName = "service_seq")
-    private Long id;
+public class ServiceDto {
 
     private String serviceName;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "SC_ID")
-    private ServiceCategory serviceCategoryID;
-
+    private String serviceCategory;
     private String serviceCategoryOther;
-
     private String serviceDescription;
-
     private String serviceLocation;
-
     private Double servicePrice;
-
     private Date serviceDate;
-
     private String serviceTime;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "STATUS_ID")
-    private ServiceStatus serviceStatus;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String serviceStatus;
+    private String userEmail;
 
     public String getServiceName() {
         return serviceName;
@@ -54,12 +26,12 @@ public class Service {
         this.serviceName = serviceName;
     }
 
-    public ServiceCategory getServiceCategoryID() {
-        return serviceCategoryID;
+    public String getServiceCategory() {
+        return serviceCategory;
     }
 
-    public void setServiceCategoryID(ServiceCategory serviceCategoryID) {
-        this.serviceCategoryID = serviceCategoryID;
+    public void setServiceCategory(String serviceCategory) {
+        this.serviceCategory = serviceCategory;
     }
 
     public String getServiceCategoryOther() {
@@ -110,11 +82,19 @@ public class Service {
         this.serviceTime = serviceTime;
     }
 
-    public ServiceStatus getServiceStatus() {
+    public String getServiceStatus() {
         return serviceStatus;
     }
 
-    public void setServiceStatus(ServiceStatus serviceStatus) {
+    public void setServiceStatus(String serviceStatus) {
         this.serviceStatus = serviceStatus;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

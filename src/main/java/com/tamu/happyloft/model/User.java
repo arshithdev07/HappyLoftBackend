@@ -2,14 +2,13 @@ package com.tamu.happyloft.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * Created by arshi on 3/17/2020.
  */
 @Entity
 @Table(name = "USER_TABLE")
-public class User {
+public class User{
 
     @Column(name = "ID")
     @Id
@@ -41,8 +40,6 @@ public class User {
     @Column(name = "CONTACT")
     private String contact;
 
-    @OneToMany(mappedBy = "user")
-    private Set<UserServices> userServices;
 
     public User() {
 
