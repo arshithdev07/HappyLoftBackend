@@ -29,6 +29,18 @@ public class UserServices{
 
     private Boolean performer;
 
+    public UserServices() {
+
+    }
+
+    public UserServices(User user, Service service, Boolean creator, Boolean interested, Boolean performer) {
+        this.user = user;
+        this.service = service;
+        this.creator = creator;
+        this.interested = interested;
+        this.performer = performer;
+    }
+
     public Long getId() {
         return id;
     }

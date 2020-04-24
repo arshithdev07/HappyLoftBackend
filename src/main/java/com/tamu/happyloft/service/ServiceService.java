@@ -1,6 +1,7 @@
 package com.tamu.happyloft.service;
 
 import com.tamu.happyloft.dto.ServiceDto;
+import com.tamu.happyloft.dto.ServiceRequestDto;
 import com.tamu.happyloft.model.ServiceCategory;
 import com.tamu.happyloft.model.ServiceStatus;
 import com.tamu.happyloft.model.User;
@@ -12,6 +13,7 @@ import com.tamu.happyloft.repository.UserServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -32,7 +34,10 @@ public class ServiceService extends AbstractHelperService{
     @Autowired
     ServiceRepository serviceRepository;
 
-    public void createService(ServiceDto serviceDto) {
+    @Autowired
+    EmailService emailService;
+
+    public UserServices createService(ServiceDto serviceDto) {
 
         User existingUser = getUserByEmail(serviceDto.getUserEmail());
         if(null == existingUser) {
@@ -64,11 +69,34 @@ public class ServiceService extends AbstractHelperService{
         userServices.setInterested(Boolean.FALSE);
         userServices.setPerformer(Boolean.FALSE);
 
-        userServiceRepository.save(userServices);
+        return userServiceRepository.save(userServices);
 
     }
 
     public List<UserServices> fetchAllServices() {
         return userServiceRepository.findAll();
+    }
+
+    public void requestService(ServiceRequestDto serviceRequestDto) throws MessagingException {
+
+        User existingRequester = getUserByEmail(serviceRequestDto.getRequesterEmail());
+        if(null == existingRequester) {
+            throw new RuntimeException("User Record for requester doesn't exist");
+        }
+
+        User existingServiceCreator = getUserByEmail(serviceRequestDto.getServiceCreatorEmail());
+        if(null == existingServiceCreator) {
+            throw new RuntimeException("User Record for service creator doesn't exist");
+        }
+
+        com.tamu.happyloft.model.Service service = serviceRepository.findById(Long.valueOf(serviceRequestDto.getServiceId())).get();
+
+        service.setServiceStatus(serviceStatusRepository.findById(Long.valueOf(2)).get());
+
+        UserServices userServices = new UserServices(existingRequester, service, false, true, false);
+
+        userServiceRepository.save(userServices);
+
+        emailService.exchangeRequestServiceInformation(existingRequester, existingServiceCreator, service);
     }
 }

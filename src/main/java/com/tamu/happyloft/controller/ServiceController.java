@@ -1,11 +1,13 @@
 package com.tamu.happyloft.controller;
 
 import com.tamu.happyloft.dto.ServiceDto;
+import com.tamu.happyloft.dto.ServiceRequestDto;
 import com.tamu.happyloft.model.UserServices;
 import com.tamu.happyloft.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -24,9 +26,14 @@ public class ServiceController {
     }
 
     @PostMapping("/create")
-    public String createService(@RequestBody ServiceDto serviceDto) {
-        serviceService.createService(serviceDto);
+    public UserServices createService(@RequestBody ServiceDto serviceDto) {
+        return serviceService.createService(serviceDto);
+    }
 
-        return "Service created successfully";
+    @PostMapping("/request")
+    public String requestService(@RequestBody ServiceRequestDto serviceRequestDto) throws MessagingException {
+        serviceService.requestService(serviceRequestDto);
+
+        return "Service Updated";
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * Created by arshi on 4/3/2020.
  */
 @Repository
-public interface ServiceStatusRepository extends JpaRepository<ServiceStatus, Integer> {
+public interface ServiceStatusRepository extends JpaRepository<ServiceStatus, Long> {
 
     List<ServiceStatus> findByStatusName(String status);
 }
