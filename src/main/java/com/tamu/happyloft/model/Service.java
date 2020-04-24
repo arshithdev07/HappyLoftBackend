@@ -28,7 +28,7 @@ public class Service {
 
     private String serviceLocation;
 
-    private Double servicePrice;
+    private String servicePrice;
 
     private Date serviceDate;
 
@@ -86,11 +86,11 @@ public class Service {
         this.serviceLocation = serviceLocation;
     }
 
-    public Double getServicePrice() {
+    public String getServicePrice() {
         return servicePrice;
     }
 
-    public void setServicePrice(Double servicePrice) {
+    public void setServicePrice(String servicePrice) {
         this.servicePrice = servicePrice;
     }
 

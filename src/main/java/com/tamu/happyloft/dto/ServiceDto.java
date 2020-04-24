@@ -12,7 +12,7 @@ public class ServiceDto {
     private String serviceCategoryOther;
     private String serviceDescription;
     private String serviceLocation;
-    private Double servicePrice;
+    private String servicePrice;
     private Date serviceDate;
     private String serviceTime;
     private String serviceStatus;
@@ -58,11 +58,11 @@ public class ServiceDto {
         this.serviceLocation = serviceLocation;
     }
 
-    public Double getServicePrice() {
+    public String getServicePrice() {
         return servicePrice;
     }
 
-    public void setServicePrice(Double servicePrice) {
+    public void setServicePrice(String servicePrice) {
         this.servicePrice = servicePrice;
     }
 
