@@ -99,4 +99,8 @@ public class ServiceService extends AbstractHelperService{
 
         emailService.exchangeRequestServiceInformation(existingRequester, existingServiceCreator, service);
     }
+
+    public List<com.tamu.happyloft.model.Service> fetchFromServiceTable() {
+        return serviceRepository.findAll();
+    }
 }

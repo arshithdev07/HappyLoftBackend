@@ -2,6 +2,7 @@ package com.tamu.happyloft.controller;
 
 import com.tamu.happyloft.dto.ServiceDto;
 import com.tamu.happyloft.dto.ServiceRequestDto;
+import com.tamu.happyloft.model.Service;
 import com.tamu.happyloft.model.UserServices;
 import com.tamu.happyloft.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class ServiceController {
     @GetMapping("/all")
     public List<UserServices> fetchAllServices() {
         return serviceService.fetchAllServices();
+    }
+
+    @GetMapping("/fetchServices")
+    public List<Service> fetchFromServiceTable() {
+        return serviceService.fetchFromServiceTable();
     }
 
     @PostMapping("/create")
